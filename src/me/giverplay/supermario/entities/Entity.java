@@ -12,22 +12,31 @@ import java.util.Random;
 import me.giverplay.supermario.Game;
 import me.giverplay.supermario.algorithms.Node;
 import me.giverplay.supermario.algorithms.Vector2i;
+import me.giverplay.supermario.graphics.Spritesheet;
 import me.giverplay.supermario.world.World;
 
 public class Entity
 {
 	public static final BufferedImage[] SPRITE_PLAYER_RIGHT;
 	public static final BufferedImage[] SPRITE_PLAYER_LEFT;
+	public static final BufferedImage[] SPRITE_ENEMY;
 	
 	static
 	{
+		Spritesheet sprites = Game.getGame().getSpritesheet();
+		
 		SPRITE_PLAYER_RIGHT = new BufferedImage[3];
 		SPRITE_PLAYER_LEFT = new BufferedImage[3];
+		SPRITE_ENEMY = new BufferedImage[6];
 		
 		for(int i = 0; i < 3; i++)
 		{
-			SPRITE_PLAYER_RIGHT[i] = Game.getGame().getSpritesheet().getSprite(i * TILE_SIZE, 1 * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-			SPRITE_PLAYER_LEFT[i] = Game.getGame().getSpritesheet().getSprite(i * TILE_SIZE, 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+			SPRITE_PLAYER_RIGHT[i] = sprites.getSprite(i * TILE_SIZE, 1 * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+			SPRITE_PLAYER_LEFT[i] = sprites.getSprite(i * TILE_SIZE, 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+			
+			SPRITE_ENEMY[i] = sprites.getSprite(i * TILE_SIZE, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
+			SPRITE_ENEMY[i + 2] = sprites.getSprite((i + 2) * TILE_SIZE, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
+			SPRITE_ENEMY[i + 3] = sprites.getSprite((i + 3) * TILE_SIZE, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
 		}
 	}
 	

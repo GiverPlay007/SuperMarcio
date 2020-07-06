@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import me.giverplay.supermario.Game;
+import me.giverplay.supermario.entities.Enemy;
 import me.giverplay.supermario.utils.Cores;
 
 public class World
@@ -20,27 +21,11 @@ public class World
 	private int width;
 	private int height;
 	
-	public int x1 = 0;
-	public int x2;
-	
-	private BufferedImage background;
-	
 	public World(String path)
 	{
 		game = Game.getGame();
 		
 		initializeWorld(path);
-		
-		try
-		{
-			this.background = ImageIO.read(Game.class.getResourceAsStream("/Background.png"));
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Background error");
-		}
-		
-		this.x2 = width;
 	}
 	
 	private void initializeWorld(String path)
@@ -69,13 +54,17 @@ public class World
 					
 					switch (pixels[index])
 					{	
-						case Cores.MAPA_GRAMA:
-							tiles[index] = new FloorTile(xx * TILE_SIZE, yy * TILE_SIZE);
+						case Cores.TILE_GRAMA:
+							tiles[index] = new FloorTile(xx * TILE_SIZE, yy * TILE_SIZE,yy == 0 ? true : pixels[xx + (yy -1) * width] != Cores.TILE_GRAMA);
 							break;
 							
-						case Cores.MAPA_JOGADOR:
+						case Cores.LOC_JOGADOR:
 							game.getPlayer().setX(xx * TILE_SIZE);
 							game.getPlayer().setY(yy * TILE_SIZE);
+							break;
+							
+						case Cores.LOC_ENEMY:
+							game.getEntities().add(new Enemy(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, 1));
 							break;
 							
 						default:
@@ -88,25 +77,6 @@ public class World
 		{
 			System.out.println("Falha ao ler o mapa");
 		}
-	}
-	
-	public void renderBackground(Graphics g)
-	{
-		x1--;
-		x2--;
-		
-		if(x1 < -background.getWidth()) 
-		{
-			x1 = 0;
-		}  
-		
-		if(x2 < 0) 
-		{
-			x2 = background.getWidth();
-		}
-		
-		g.drawImage(background, x1, 0, background.getWidth(), Game.HEIGHT, null);
-		g.drawImage(background, x2, 0, background.getWidth(), Game.HEIGHT, null);
 	}
 	
 	public void render(Graphics g)

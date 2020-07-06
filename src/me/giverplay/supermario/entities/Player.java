@@ -1,7 +1,6 @@
 package me.giverplay.supermario.entities;
 
 import static me.giverplay.supermario.world.World.canMove;
-import static me.giverplay.supermario.world.World.TILE_SIZE;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -11,7 +10,7 @@ import me.giverplay.supermario.graphics.Camera;
 import me.giverplay.supermario.sound.Sound;
 
 public class Player extends Entity
-{	
+{
 	private static final int DIR_RIGHT = 0;
 	private static final int DIR_LEFT = 1;
 	
@@ -50,51 +49,50 @@ public class Player extends Entity
 	@Override
 	public void tick()
 	{
-		if(!isJumping && canMove(getX(), (int) (y + speed * 2)))
+		if (!isJumping && canMove(getX(), (int) (y + speed * 2)))
 			moveY(speed * 2);
 		
-		if(vida == 0)
+		if (vida == 0)
 		{
 			game.matar();
 			return;
 		}
 		
-		if(!canDamage)
+		if (!canDamage)
 		{
 			undamageable++;
 			
-			if(undamageable >= 30)
+			if (undamageable >= 30)
 			{
 				undamageable = 0;
 				canDamage = true;
 			}
 		}
 		
-		if(jump && !isJumping)
+		if (jump && !isJumping)
 		{
 			jump = false;
 			
-			if(!isJumping)
+			if (!isJumping)
 			{
 				isJumping = true;
 			}
 		}
 		
-		if(isJumping)
+		if (isJumping)
 		{
 			jumpFrames++;
 			
-			if(canMove(getX(), (int) (y -speed * 2)))
+			if (canMove(getX(), (int) (y - speed * 2)))
 			{
 				moveY(-speed * 2);
-			}
-			else
+			} else
 			{
 				jumpFrames = 0;
 				isJumping = false;
 			}
 			
-			if(jumpFrames >= MAX_JUMP_FRAMES)
+			if (jumpFrames >= MAX_JUMP_FRAMES)
 			{
 				jumpFrames = 0;
 				isJumping = false;
@@ -103,50 +101,49 @@ public class Player extends Entity
 		
 		moving = false;
 		
-		if(!(right && left))
+		if (!(right && left))
 		{
-			if(right)
+			if (right)
 			{
-				if(canMove((int) (x + speed), getY())) 
+				if (canMove((int) (x + speed), getY()))
 				{
 					moveX(speed);
-					if(!isJumping) moving = true;
+					if (!isJumping)
+						moving = true;
 				}
 				
-			}
-			else if(left)
+			} else if (left)
 			{
-				if(canMove((int) (x - speed), getY()))
+				if (canMove((int) (x - speed), getY()))
 				{
 					moveX(-speed);
-					if(!isJumping) moving = true;
+					if (!isJumping)
+						moving = true;
 				}
 			}
 		}
 		
-		if(isJumping)
+		if (isJumping)
 		{
 			
-		}
-		else if(moving)
+		} else if (moving)
 		{
 			anim_frames++;
 			
-			if(anim_frames >= MAX_FRAMES_ANIM)
+			if (anim_frames >= MAX_FRAMES_ANIM)
 			{
 				anim_frames = 0;
 				
-				if(!animChangeStage)
+				if (!animChangeStage)
 					anim++;
 				else
 					anim--;
 				
-				if(anim >= Entity.SPRITE_PLAYER_RIGHT.length - 1)
+				if (anim >= Entity.SPRITE_PLAYER_RIGHT.length - 1)
 				{
 					anim--;
 					animChangeStage = !animChangeStage;
-				}
-				else if(anim < 0)
+				} else if (anim < 0)
 				{
 					anim++;
 					animChangeStage = !animChangeStage;
@@ -159,14 +156,15 @@ public class Player extends Entity
 	
 	private void updateCamera()
 	{
-		camera.setX(camera.clamp(getX() - (Game.WIDTH / 2), 0, game.getWorld().getHeight() * TILE_SIZE - Game.WIDTH));
-		camera.setY(camera.clamp(getY() - (Game.HEIGHT / 2), 0, game.getWorld().getWidth() * TILE_SIZE - Game.HEIGHT));
+		camera.setX(Camera.clamp(this.getX() - (Game.WIDTH / 2), 0, game.getWorld().getWidth() * 16 - Game.WIDTH));
+		camera.setY(Camera.clamp(this.getY() - (Game.HEIGHT / 2), 0, game.getWorld().getHeight() * 16 - Game.HEIGHT));
 	}
 	
 	@Override
 	public void render(Graphics g)
 	{
-		BufferedImage image = (dir == DIR_RIGHT ? SPRITE_PLAYER_RIGHT : SPRITE_PLAYER_LEFT)[!isJumping ? anim : 2].getSubimage(0, 0, 16, 16);
+		BufferedImage image = (dir == DIR_RIGHT ? SPRITE_PLAYER_RIGHT : SPRITE_PLAYER_LEFT)[!isJumping ? anim : 2]
+				.getSubimage(0, 0, 16, 16);
 		
 		g.drawImage(image, getX() - camera.getX(), getY() - camera.getY(), null);
 	}
@@ -196,7 +194,7 @@ public class Player extends Entity
 		this.right = walking;
 		this.dir = DIR_RIGHT;
 		
-		if(!walking && left)
+		if (!walking && left)
 			dir = DIR_LEFT;
 	}
 	
@@ -205,7 +203,7 @@ public class Player extends Entity
 		this.left = walking;
 		this.dir = DIR_LEFT;
 		
-		if(!walking && right)
+		if (!walking && right)
 			dir = DIR_RIGHT;
 	}
 	
@@ -244,19 +242,20 @@ public class Player extends Entity
 	
 	public void handleJump()
 	{
-		if(!canMove(getX(), (int) (y +1))) jump = true;
+		if (!canMove(getX(), (int) (y + 1)))
+			jump = true;
 	}
 	
 	public void damage()
 	{
-		if(!canDamage)
+		if (!canDamage)
 			return;
 		
 		canDamage = false;
 		
 		vida--;
 		
-		if(vida < 0)
+		if (vida < 0)
 			vida = 0;
 		
 		Sound.hit.play();

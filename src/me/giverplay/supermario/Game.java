@@ -201,12 +201,11 @@ public class Game extends Canvas implements Runnable
 		
 		Graphics g = image.getGraphics();
 		
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(110, 200, 255));
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
 		/** Renderiaza��o do Jogo **/
 		
-		world.renderBackground(g);
 		world.render(g);
 		
 		Collections.sort(entities, Entity.sortDepth);

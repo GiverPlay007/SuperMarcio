@@ -2,8 +2,8 @@ package me.giverplay.supermario.world;
 
 public class FloorTile extends Tile
 {
-	public FloorTile(int x, int y)
+	public FloorTile(int x, int y, boolean top)
 	{
-		super(x, y, true, Tile.TILE_PLATFORM);
+		super(x, y, true, top ? Tile.TILE_PLATFORM : Tile.TILE_PLATFORM_DOWN);
 	}
 }

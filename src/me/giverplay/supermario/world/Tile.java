@@ -13,6 +13,7 @@ public class Tile
 	
 	public static BufferedImage TILE_PAREDE = game.getSpritesheet().getSprite(TILE_SIZE * 0, 0, TILE_SIZE, TILE_SIZE);
 	public static BufferedImage TILE_PLATFORM = game.getSpritesheet().getSprite(TILE_SIZE * 2, 0, TILE_SIZE, TILE_SIZE);
+	public static BufferedImage TILE_PLATFORM_DOWN = game.getSpritesheet().getSprite(TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 	
 	private BufferedImage sprite;
 	

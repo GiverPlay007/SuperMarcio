@@ -31,7 +31,7 @@ public class Camera
 		return this.x;
 	}
 	
-	public int clamp(int atual, int min, int max)
+	public static int clamp(int atual, int min, int max)
 	{
 		if(atual < min)
 		  atual = min;
