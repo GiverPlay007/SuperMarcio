@@ -19,8 +19,10 @@ import me.giverplay.supermario.entities.Player;
 import me.giverplay.supermario.events.Listeners;
 import me.giverplay.supermario.graphics.Camera;
 import me.giverplay.supermario.graphics.FontUtils;
+import me.giverplay.supermario.graphics.FutureRender;
 import me.giverplay.supermario.graphics.Spritesheet;
 import me.giverplay.supermario.graphics.UI;
+import me.giverplay.supermario.sound.Sound;
 import me.giverplay.supermario.world.World;
 
 public class Game extends Canvas implements Runnable
@@ -32,6 +34,7 @@ public class Game extends Canvas implements Runnable
 	public static final int SCALE = 2;
 	
 	private List<Entity> entities;
+	private List<FutureRender> smoothRenders;
 	
 	private static Game game;
 	private static int FPS = 0;
@@ -53,13 +56,15 @@ public class Game extends Canvas implements Runnable
 	
 	private int gameOverFrames = 0;
 	private int maxGameOverFrames = 30;
+	private int coins = 0;
+	private int maxCoins = 0;
 	
 	public static Game getGame()
 	{
 		return game;
 	}
 	
-	// M�todos Startup | TODO
+	// Métodos Startup | TODO
 	public Game()
 	{
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -91,7 +96,11 @@ public class Game extends Canvas implements Runnable
 	{
 		game = this;
 		
+		coins = 0;
+		maxCoins = 0;
+		
 		entities = new ArrayList<>();
+		smoothRenders = new ArrayList<>();
 		
 		camera = new Camera(0, 0);
 		sprite = new Spritesheet("/Spritesheet.png");
@@ -252,6 +261,13 @@ public class Game extends Canvas implements Runnable
 	
 	public void renderSmooth(Graphics g)
 	{
+		for(int i = 0; i < smoothRenders.size(); i++)
+		{
+			FutureRender run = smoothRenders.get(i);
+			run.render(g);
+			smoothRenders.remove(run);
+		}
+		
 		ui.render(g);
 		
 		g.setColor(new Color(100, 100, 100));
@@ -298,10 +314,36 @@ public class Game extends Canvas implements Runnable
 	public void matar()
 	{
 		this.morreu = true;
+		Sound.lose.play();
 	}
 	
 	public Camera getCamera()
 	{
 		return this.camera;
+	}
+	
+	public void addCoin()
+	{
+		this.coins++;
+	}
+	
+	public void addMaxCoin()
+	{
+		this.maxCoins++;
+	}
+	
+	public int getCoins()
+	{
+		return this.coins;
+	}
+	
+	public int getMaxCoins()
+	{
+		return this.maxCoins;
+	}
+	
+	public void addSmoothRender(FutureRender run)
+	{
+		smoothRenders.add(run);
 	}
 }

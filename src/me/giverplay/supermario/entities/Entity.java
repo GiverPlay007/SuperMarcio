@@ -21,6 +21,8 @@ public class Entity
 	public static final BufferedImage[] SPRITE_PLAYER_LEFT;
 	public static final BufferedImage[] SPRITE_ENEMY;
 	
+	public static final BufferedImage SPRITE_COINS;
+	
 	static
 	{
 		Spritesheet sprites = Game.getGame().getSpritesheet();
@@ -38,6 +40,8 @@ public class Entity
 			SPRITE_ENEMY[i + 2] = sprites.getSprite((i + 2) * TILE_SIZE, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
 			SPRITE_ENEMY[i + 3] = sprites.getSprite((i + 3) * TILE_SIZE, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
 		}
+		
+		SPRITE_COINS = sprites.getSprite(0, 4 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE);
 	}
 	
 	private static Game game = Game.getGame();
@@ -74,7 +78,7 @@ public class Entity
 	
 	public void render(Graphics g)
 	{
-		g.drawImage(sprite, getX() - game.getCamera().getX(), getY() - game.getCamera().getY(), null);
+		g.drawImage(sprite, getX() - game.getCamera().getX(), getY() - game.getCamera().getY(), width, height, null);
 	}
 	
 	public void destroy()

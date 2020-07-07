@@ -14,6 +14,9 @@ public class Sound
 {
 	public static Clips collect = load("/collect.wav", 1);
 	public static Clips hit = load("/hit.wav", 1);
+	public static Clips lose = load("/lose4.wav", 1);
+	public static Clips hit2 = load("/coin12.wav", 1);
+	public static Clips jump = load("/coin11.wav", 1);
 		
 	public static class Clips
 	{

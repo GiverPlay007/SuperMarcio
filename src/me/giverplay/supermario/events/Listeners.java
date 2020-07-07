@@ -20,7 +20,7 @@ public class Listeners implements KeyListener
 	{
 		if(!game.morreu() && !game.venceu())
 		{
-			if(event.getKeyCode() == KeyEvent.VK_SPACE)
+			if(event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_UP)
 			{
 				game.getPlayer().handleJump();
 			}

@@ -5,6 +5,7 @@ import static me.giverplay.supermario.world.World.canMove;
 import java.awt.Graphics;
 
 import me.giverplay.supermario.Game;
+import me.giverplay.supermario.sound.Sound;
 import me.giverplay.supermario.world.World;
 
 public class Enemy extends Entity
@@ -35,6 +36,14 @@ public class Enemy extends Entity
 	@Override
 	public void tick()
 	{
+		if(isCollifingEntity(this, game.getPlayer()))
+		{
+			if(game.getPlayer().fallingRelative())
+				destroy();
+			else
+				game.getPlayer().damage();
+		}
+		
 		if (canMove(getX(), (int) (y + speed * 2)))
 			moveY(speed * 2);
 		
@@ -64,5 +73,12 @@ public class Enemy extends Entity
 		}
 		
 		g.drawImage(SPRITE_ENEMY[anim], getX() - game.getCamera().getX(), getY() - game.getCamera().getY(), null);
+	}
+	
+	@Override
+	public void destroy()
+	{
+		super.destroy();
+		Sound.hit2.play();
 	}
 }

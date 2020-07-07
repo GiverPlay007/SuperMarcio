@@ -1,6 +1,18 @@
 package me.giverplay.supermario.entities;
 
-public interface Collectible
+import java.awt.image.BufferedImage;
+
+import me.giverplay.supermario.Game;
+
+public class Collectible extends Entity
 {
-	public void collect();
+	public Collectible(double x, double y, BufferedImage sprite)
+	{
+		super(x, y, 10, 10, 0, sprite);
+	}
+	
+	public void collect()
+	{
+		Game.getGame().getEntities().remove(this);
+	}
 }

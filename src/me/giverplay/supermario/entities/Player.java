@@ -15,7 +15,6 @@ public class Player extends Entity
 	private static final int DIR_LEFT = 1;
 	
 	private static final int MAX_FRAMES_ANIM = 5;
-	private static final int MAX_JUMP_FRAMES = 22;
 	
 	private boolean up, down, left, right;
 	
@@ -26,13 +25,15 @@ public class Player extends Entity
 	private boolean canDamage = false;
 	private boolean moving = false;
 	
+	private double gravity = 0.4;
+	private double vspd = 0;
+	
 	private int undamageable = 0;
 	private int maxVida = 5;
 	private int vida = 5;
 	private int anim = 0;
 	private int anim_frames = 0;
 	private int dir = 0;
-	private int jumpFrames = 0;
 	
 	private Game game;
 	private Camera camera;
@@ -49,9 +50,6 @@ public class Player extends Entity
 	@Override
 	public void tick()
 	{
-		if (!isJumping && canMove(getX(), (int) (y + speed * 2)))
-			moveY(speed * 2);
-		
 		if (vida == 0)
 		{
 			game.matar();
@@ -62,42 +60,44 @@ public class Player extends Entity
 		{
 			undamageable++;
 			
-			if (undamageable >= 30)
+			if (undamageable >= 40)
 			{
 				undamageable = 0;
 				canDamage = true;
 			}
 		}
 		
-		if (jump && !isJumping)
+		vspd += gravity;
+		
+		if (!canMove((int) x, (int) (y + 1)) && jump)
 		{
+			vspd = -6;
 			jump = false;
-			
-			if (!isJumping)
-			{
-				isJumping = true;
-			}
+			Sound.jump.play();
 		}
 		
-		if (isJumping)
+		if (!canMove((int) x, (int) (y + vspd)))
 		{
-			jumpFrames++;
 			
-			if (canMove(getX(), (int) (y - speed * 2)))
+			int signVsp = 0;
+			
+			if (vspd >= 0)
 			{
-				moveY(-speed * 2);
+				signVsp = 1;
 			} else
 			{
-				jumpFrames = 0;
-				isJumping = false;
+				signVsp = -1;
 			}
 			
-			if (jumpFrames >= MAX_JUMP_FRAMES)
+			while (canMove((int) x, (int) (y + signVsp)))
 			{
-				jumpFrames = 0;
-				isJumping = false;
+				y = y + signVsp;
 			}
+			
+			vspd = 0;
 		}
+		
+		y = y + vspd;
 		
 		moving = false;
 		
@@ -163,7 +163,7 @@ public class Player extends Entity
 	@Override
 	public void render(Graphics g)
 	{
-		BufferedImage image = (dir == DIR_RIGHT ? SPRITE_PLAYER_RIGHT : SPRITE_PLAYER_LEFT)[!isJumping ? anim : 2]
+		BufferedImage image = (dir == DIR_RIGHT ? SPRITE_PLAYER_RIGHT : SPRITE_PLAYER_LEFT)[vspd == 0 ? anim : 2]
 				.getSubimage(0, 0, 16, 16);
 		
 		g.drawImage(image, getX() - camera.getX(), getY() - camera.getY(), null);
@@ -261,13 +261,13 @@ public class Player extends Entity
 		Sound.hit.play();
 	}
 	
-	public boolean isJumping()
-	{
-		return this.isJumping;
-	}
-	
 	public boolean canBeDamaged()
 	{
 		return this.canDamage;
+	}
+	
+	public boolean fallingRelative()
+	{
+		return canMove(getX(), getY() + 1) && vspd >= 0;
 	}
 }

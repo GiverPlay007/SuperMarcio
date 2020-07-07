@@ -7,7 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import me.giverplay.supermario.Game;
+import me.giverplay.supermario.entities.Coin;
 import me.giverplay.supermario.entities.Enemy;
+import me.giverplay.supermario.graphics.Camera;
 import me.giverplay.supermario.utils.Cores;
 
 public class World
@@ -17,6 +19,7 @@ public class World
 	private static Tile[] tiles;
 	
 	private Game game;
+	private Camera camera;
 	
 	private int width;
 	private int height;
@@ -24,6 +27,7 @@ public class World
 	public World(String path)
 	{
 		game = Game.getGame();
+		camera = game.getCamera();
 		
 		initializeWorld(path);
 	}
@@ -67,6 +71,11 @@ public class World
 							game.getEntities().add(new Enemy(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, 1));
 							break;
 							
+						case Cores.LOC_COIN:
+							game.getEntities().add(new Coin(xx * TILE_SIZE, yy * TILE_SIZE));
+							game.addMaxCoin();
+							break;
+							
 						default:
 							break;
 					}
@@ -81,16 +90,18 @@ public class World
 	
 	public void render(Graphics g)
 	{
-		int xf = (Game.WIDTH * Game.SCALE >> 4);
-		int yf = (Game.HEIGHT * Game.SCALE >> 4);
+		int xs = camera.getX() >> 4;
+		int ys = camera.getY() >> 4;
+		int xf = (camera.getX() + Game.WIDTH) >> 4;
+		int yf = (camera.getX() + Game.HEIGHT) >> 4;
 		
 		
-		for(int xx = 0; xx <= xf; xx++)
+		for(int xx = xs; xx <= xf; xx++)
 		{
-			for(int yy = 0; yy <= yf; yy++)
+			for(int yy = ys; yy <= yf; yy++)
 			{
 				
-				if(xx < 0 || yy < 0 || xx >= width || yy >= height)
+				if(xx < xs || yy < ys || xx >= width || yy >= height)
 					continue;
 				
 				Tile tile = tiles[xx + yy * width];
