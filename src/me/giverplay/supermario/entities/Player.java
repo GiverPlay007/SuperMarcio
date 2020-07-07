@@ -69,7 +69,7 @@ public class Player extends Entity
 		
 		vspd += gravity;
 		
-		if (!canMove((int) x, (int) (y + 1)) && jump)
+		if (jump && !canMove(getX(), (int) (y + 1)) && canMove(getX(), (int) (y -1)))
 		{
 			vspd = -6;
 			jump = false;

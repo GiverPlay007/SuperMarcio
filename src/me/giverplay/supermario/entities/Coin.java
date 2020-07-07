@@ -42,6 +42,6 @@ public class Coin extends Collectible
 	{
 		super.collect();
 		game.addCoin();
-		Sound.collect.play();
+		Sound.coin.play();
 	}
 }

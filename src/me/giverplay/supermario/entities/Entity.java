@@ -22,6 +22,11 @@ public class Entity
 	public static final BufferedImage[] SPRITE_ENEMY;
 	
 	public static final BufferedImage SPRITE_COINS;
+	public static final BufferedImage SPRITE_LIFEPACK;
+	public static final BufferedImage SPRITE_LOCK;
+	public static final BufferedImage SPRITE_NEXTLEVEL;
+	public static final BufferedImage SPRITE_LIFE_FULL;
+	public static final BufferedImage SPRITE_LIFE_NON_FULL;
 	
 	static
 	{
@@ -42,6 +47,11 @@ public class Entity
 		}
 		
 		SPRITE_COINS = sprites.getSprite(0, 4 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE);
+		SPRITE_LIFEPACK = sprites.getSprite(TILE_SIZE * 3, TILE_SIZE * 4, TILE_SIZE, TILE_SIZE);
+		SPRITE_NEXTLEVEL = sprites.getSprite(TILE_SIZE * 2, TILE_SIZE * 4, TILE_SIZE, TILE_SIZE);
+		SPRITE_LOCK = sprites.getSprite(TILE_SIZE * 2, TILE_SIZE * 5, TILE_SIZE, TILE_SIZE);
+		SPRITE_LIFE_FULL = sprites.getSprite(TILE_SIZE * 4, TILE_SIZE * 4, TILE_SIZE, TILE_SIZE);
+		SPRITE_LIFE_NON_FULL = sprites.getSprite(TILE_SIZE * 5, TILE_SIZE * 4, TILE_SIZE, TILE_SIZE);
 	}
 	
 	private static Game game = Game.getGame();

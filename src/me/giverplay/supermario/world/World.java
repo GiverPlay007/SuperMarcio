@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import me.giverplay.supermario.Game;
 import me.giverplay.supermario.entities.Coin;
 import me.giverplay.supermario.entities.Enemy;
+import me.giverplay.supermario.entities.LifePack;
+import me.giverplay.supermario.entities.NextLevel;
 import me.giverplay.supermario.graphics.Camera;
 import me.giverplay.supermario.utils.Cores;
 
@@ -69,11 +71,20 @@ public class World
 							
 						case Cores.LOC_ENEMY:
 							game.getEntities().add(new Enemy(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, 1));
+							game.addMaxEnemyCount();
 							break;
 							
 						case Cores.LOC_COIN:
 							game.getEntities().add(new Coin(xx * TILE_SIZE, yy * TILE_SIZE));
 							game.addMaxCoin();
+							break;
+							
+						case Cores.LOC_CHECK:
+							game.getEntities().add(new NextLevel(xx * TILE_SIZE, yy * TILE_SIZE));
+							break;
+							
+						case Cores.LOC_LIFEPACK:
+							game.getEntities().add(new LifePack(xx * TILE_SIZE, yy * TILE_SIZE));
 							break;
 							
 						default:

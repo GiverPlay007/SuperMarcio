@@ -12,11 +12,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound
 {
-	public static Clips collect = load("/collect.wav", 1);
+	public static Clips coin = load("/coin.wav", 1);
 	public static Clips hit = load("/hit.wav", 1);
-	public static Clips lose = load("/lose4.wav", 1);
-	public static Clips hit2 = load("/coin12.wav", 1);
-	public static Clips jump = load("/coin11.wav", 1);
+	public static Clips lose = load("/lose.wav", 1);
+	public static Clips hit2 = load("/hit2.wav", 1);
+	public static Clips jump = load("/jump.wav", 1);
+	public static Clips life = load("/life.wav", 1);
+	public static Clips up = load("/up.wav", 1);
 		
 	public static class Clips
 	{

@@ -58,6 +58,8 @@ public class Game extends Canvas implements Runnable
 	private int maxGameOverFrames = 30;
 	private int coins = 0;
 	private int maxCoins = 0;
+	private int enemyC = 0;
+	private int maxEnemyC = 0;
 	
 	public static Game getGame()
 	{
@@ -98,6 +100,8 @@ public class Game extends Canvas implements Runnable
 		
 		coins = 0;
 		maxCoins = 0;
+		enemyC = 0;
+		maxEnemyC = 0;
 		
 		entities = new ArrayList<>();
 		smoothRenders = new ArrayList<>();
@@ -183,7 +187,7 @@ public class Game extends Canvas implements Runnable
 			{
 				FPS = fps;
 				fps = 0;
-				timer = System.currentTimeMillis();
+				timer += 1000;
 			}
 		}
 		
@@ -345,5 +349,35 @@ public class Game extends Canvas implements Runnable
 	public void addSmoothRender(FutureRender run)
 	{
 		smoothRenders.add(run);
+	}
+	
+	public int getMaxEnemies()
+	{
+		return this.maxEnemyC;
+	}
+	
+	public int getEnemyCount()
+	{
+		return this.enemyC;
+	}
+	
+	public void addEnemyCount()
+	{
+		this.enemyC++;
+	}
+	
+	public void addMaxEnemyCount()
+	{
+		this.maxEnemyC++;
+	}
+	
+	public boolean canLevelUP()
+	{		
+		return maxEnemyC - enemyC == 0 && maxCoins - coins == 0;
+	}
+	
+	public void handleLevelUP()
+	{
+		
 	}
 }

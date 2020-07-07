@@ -24,6 +24,8 @@ public class Enemy extends Entity
 	{
 		super(x, y, width, height, speed, null);
 		
+		setDepth(1);
+		
 		coeff = random.nextInt(6);
 		coeff = coeff == 1 ? 0 : coeff == 3 ? 2 : coeff == 5 ? 4 : coeff;	
 		
@@ -80,5 +82,6 @@ public class Enemy extends Entity
 	{
 		super.destroy();
 		Sound.hit2.play();
+		game.addEnemyCount();
 	}
 }
