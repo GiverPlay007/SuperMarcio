@@ -19,7 +19,12 @@ public class Sound
 	public static Clips jump = load("/jump.wav", 1);
 	public static Clips life = load("/life.wav", 1);
 	public static Clips up = load("/up.wav", 1);
-		
+	
+	public static void init()
+	{
+		// Apenas corrigir o lag
+	}
+	
 	public static class Clips
 	{
 		public Clip[] clips;

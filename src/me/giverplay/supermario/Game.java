@@ -73,6 +73,8 @@ public class Game extends Canvas implements Runnable
 		
 		setupFrame();
 		setupAssets();
+		
+		Sound.init();
 	}
 	
 	public static void main(String[] args)
