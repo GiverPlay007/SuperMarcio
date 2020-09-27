@@ -72,9 +72,10 @@ public class Player extends Entity
 		if (jump && !canMove(getX(), (int) (y + 1)) && canMove(getX(), (int) (y -1)))
 		{
 			vspd = -6;
-			jump = false;
 			Sound.jump.play();
 		}
+		
+		jump = false;
 		
 		if (!canMove((int) x, (int) (y + vspd)))
 		{
