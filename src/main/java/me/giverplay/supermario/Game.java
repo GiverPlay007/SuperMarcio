@@ -34,6 +34,7 @@ public class Game extends Canvas implements Runnable
 	public static final int SCALE = 2;
 	
 	private List<Entity> entities;
+	private List<Entity> toRemoveEntities;
 	private List<FutureRender> smoothRenders;
 	
 	private static Game game;
@@ -106,6 +107,7 @@ public class Game extends Canvas implements Runnable
 		maxEnemyC = 0;
 		
 		entities = new ArrayList<>();
+		toRemoveEntities = new ArrayList<>();
 		smoothRenders = new ArrayList<>();
 		
 		camera = new Camera(0, 0);
@@ -200,7 +202,9 @@ public class Game extends Canvas implements Runnable
 	{
 		if(!morreu && !nextLevel)
 		{
-			for(int i = 0; i < entities.size(); i++) entities.get(i).tick();
+			entities.forEach(Entity::tick);
+			toRemoveEntities.forEach(toRemoveEntity -> entities.remove(toRemoveEntity));
+			toRemoveEntities.clear();
 		}
 	}
 	
@@ -223,7 +227,7 @@ public class Game extends Canvas implements Runnable
 		
 		world.render(g);
 		
-		Collections.sort(entities, Entity.sortDepth);
+		entities.sort(Entity.sortDepth);
 		
 		for(int i = 0; i < entities.size(); i++) entities.get(i).render(g);
 		
@@ -267,13 +271,9 @@ public class Game extends Canvas implements Runnable
 	
 	public void renderSmooth(Graphics g)
 	{
-		for(int i = 0; i < smoothRenders.size(); i++)
-		{
-			FutureRender run = smoothRenders.get(i);
-			run.render(g);
-			smoothRenders.remove(run);
-		}
-		
+		smoothRenders.forEach(smoothRender -> smoothRender.render(g));
+		smoothRenders.clear();
+
 		ui.render(g);
 		
 		g.setColor(new Color(100, 100, 100));
@@ -381,5 +381,9 @@ public class Game extends Canvas implements Runnable
 	public void handleLevelUP()
 	{
 		
+	}
+
+	public void removeEntity(Entity entity) {
+		toRemoveEntities.add(entity);
 	}
 }

@@ -14,6 +14,6 @@ public class Collectible extends Entity
 	
 	public void collect()
 	{
-		Game.getGame().getEntities().remove(this);
+		Game.getGame().removeEntity(this);
 	}
 }
