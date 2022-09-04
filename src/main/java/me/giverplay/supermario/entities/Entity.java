@@ -88,7 +88,7 @@ public class Entity {
   }
 
   public void destroy() {
-    game.getEntities().remove(this);
+    game.removeEntity(this);
   }
 
   public void moveX(double d) {
