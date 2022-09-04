@@ -1,16 +1,12 @@
 package me.giverplay.supermario.entities;
 
 import me.giverplay.supermario.Game;
-import me.giverplay.supermario.algorithms.Node;
-import me.giverplay.supermario.algorithms.Vector2i;
 import me.giverplay.supermario.graphics.Spritesheet;
-import me.giverplay.supermario.world.World;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
 
 import static me.giverplay.supermario.world.World.TILE_SIZE;
@@ -60,7 +56,6 @@ public class Entity {
   private final int width;
   private final int height;
   private final BufferedImage sprite;
-  protected List<Node> path;
   protected double x;
   protected double y;
   protected double speed;
@@ -138,29 +133,6 @@ public class Entity {
 
   public BufferedImage getSprite() {
     return this.sprite;
-  }
-
-  public void followPath(List<Node> path) {
-    if(path != null) {
-      if(path.size() > 0) {
-        Vector2i target = path.get(path.size() - 1).getTile();
-
-        if(x < target.x * World.TILE_SIZE) {
-          x++;
-        } else if(x > target.x * World.TILE_SIZE) {
-          x--;
-        }
-
-        if(y < target.y * World.TILE_SIZE) {
-          y++;
-        } else if(y > target.y * World.TILE_SIZE) {
-          y--;
-        }
-
-        if(x == target.x * World.TILE_SIZE && y == target.y * World.TILE_SIZE)
-          path.remove(path.size() - 1);
-      }
-    }
   }
 
   public double pointDistance(int x1, int y1, int x2, int y2) {
