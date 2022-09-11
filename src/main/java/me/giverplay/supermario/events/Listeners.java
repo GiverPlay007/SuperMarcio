@@ -15,7 +15,7 @@ public class Listeners implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent event) {
-    if(!game.morreu() && !game.venceu()) {
+    if(!game.isGameOver() && !game.isVictory()) {
       if(event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_UP) {
         game.getPlayer().handleJump();
       }

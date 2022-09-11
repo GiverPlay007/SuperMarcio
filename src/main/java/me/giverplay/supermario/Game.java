@@ -28,6 +28,8 @@ public class Game extends Canvas implements Runnable {
   public static final int HEIGHT = 240;
   public static final int SCALE = 2;
 
+  private final int maxLevel = 2;
+
   private static final long serialVersionUID = 1L;
 
   private static Game game;
@@ -50,20 +52,23 @@ public class Game extends Canvas implements Runnable {
 
   private boolean isRunning = false;
   private boolean showGameOver = true;
-  private boolean morreu = false;
+  private boolean gameOver = false;
   private boolean nextLevel = false;
+  private boolean victory;
 
   private int gameOverFrames = 0;
   private int coins = 0;
   private int maxCoins = 0;
   private int enemyC = 0;
   private int maxEnemyC = 0;
+  private int level = 1;
 
   public Game() {
     setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
     setupFrame();
     setupAssets();
+    initLevel();
 
     Sound.init();
   }
@@ -96,27 +101,36 @@ public class Game extends Canvas implements Runnable {
   private void setupAssets() {
     game = this;
 
-    coins = 0;
-    maxCoins = 0;
-    enemyC = 0;
-    maxEnemyC = 0;
-
     entities = new ArrayList<>();
     toRemoveEntities = new ArrayList<>();
     smoothRenders = new ArrayList<>();
 
     camera = new Camera(0, 0);
     sprite = new Spritesheet("/Spritesheet.png");
-    player = new Player(1, 1, 16, 16);
-    world = new World("/World.png");
 
     ui = new UI();
 
-    entities.add(player);
     image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_BGR);
 
     nextLevel = false;
-    morreu = false;
+    gameOver = false;
+    level = 1;
+    victory = false;
+  }
+
+  private void initLevel() {
+    coins = 0;
+    maxCoins = 0;
+    enemyC = 0;
+    maxEnemyC = 0;
+
+    smoothRenders.clear();
+    toRemoveEntities.clear();
+    entities.clear();
+
+    player = new Player(1, 1, 16, 16);
+    entities.add(player);
+    world = new World(String.format("/World%d.png", level));
   }
 
   public synchronized void start() {
@@ -137,6 +151,7 @@ public class Game extends Canvas implements Runnable {
 
   public synchronized void restart() {
     setupAssets();
+    initLevel();
   }
 
   @Override
@@ -176,14 +191,23 @@ public class Game extends Canvas implements Runnable {
   }
 
   public synchronized void tick() {
-    if(!morreu && !nextLevel) {
+    if(!gameOver && !victory) {
       entities.forEach(Entity::tick);
       toRemoveEntities.forEach(toRemoveEntity -> entities.remove(toRemoveEntity));
       toRemoveEntities.clear();
     }
+
+    if(nextLevel) {
+      initLevel();
+    }
   }
 
   public synchronized void render() {
+    if(nextLevel) {
+      nextLevel = false;
+      return;
+    }
+
     BufferStrategy bs = this.getBufferStrategy();
 
     if(bs == null) {
@@ -207,13 +231,13 @@ public class Game extends Canvas implements Runnable {
 
     renderSmooth(g);
 
-    if(morreu || nextLevel) {
+    if(gameOver || victory) {
       Graphics2D g2 = (Graphics2D) g;
 
       g2.setColor(new Color(0, 0, 0, 100));
       g2.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 
-      String txt = morreu ? "Game Over" : "Você Venceu!";
+      String txt = gameOver ? "Game Over" : "Você Venceu!";
       g.setColor(Color.WHITE);
       g.setFont(FontUtils.getFont(32, Font.BOLD));
       g.drawString(txt, (WIDTH * SCALE - g.getFontMetrics(g.getFont()).stringWidth(txt)) / 2, HEIGHT * SCALE / 2);
@@ -264,16 +288,16 @@ public class Game extends Canvas implements Runnable {
     return this.entities;
   }
 
-  public boolean morreu() {
-    return this.morreu;
+  public boolean isGameOver() {
+    return this.gameOver;
   }
 
-  public boolean venceu() {
+  public boolean isNextLevel() {
     return this.nextLevel;
   }
 
-  public void matar() {
-    this.morreu = true;
+  public void handleGameOver() {
+    this.gameOver = true;
     Sound.lose.play();
   }
 
@@ -322,7 +346,17 @@ public class Game extends Canvas implements Runnable {
   }
 
   public void handleLevelUP() {
+    if(level == maxLevel) {
+      this.victory = true;
+      return;
+    }
 
+    nextLevel = true;
+    level++;
+  }
+
+  public boolean isVictory() {
+    return victory;
   }
 
   public void removeEntity(Entity entity) {

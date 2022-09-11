@@ -50,7 +50,7 @@ public class Player extends Entity {
   @Override
   public void tick() {
     if(vida == 0) {
-      game.matar();
+      game.handleGameOver();
       return;
     }
 
