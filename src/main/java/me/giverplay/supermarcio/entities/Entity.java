@@ -1,7 +1,7 @@
-package me.giverplay.supermario.entities;
+package me.giverplay.supermarcio.entities;
 
-import me.giverplay.supermario.Game;
-import me.giverplay.supermario.graphics.Spritesheet;
+import me.giverplay.supermarcio.Game;
+import me.giverplay.supermarcio.graphics.Spritesheet;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.Comparator;
 import java.util.Random;
 
-import static me.giverplay.supermario.world.World.TILE_SIZE;
+import static me.giverplay.supermarcio.world.World.TILE_SIZE;
 
 public class Entity {
   public static final BufferedImage[] SPRITE_PLAYER_RIGHT;

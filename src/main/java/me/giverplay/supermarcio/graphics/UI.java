@@ -1,15 +1,15 @@
-package me.giverplay.supermario.graphics;
+package me.giverplay.supermarcio.graphics;
 
-import me.giverplay.supermario.Game;
-import me.giverplay.supermario.entities.Entity;
+import me.giverplay.supermarcio.Game;
+import me.giverplay.supermarcio.entities.Entity;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import static me.giverplay.supermario.Game.HEIGHT;
-import static me.giverplay.supermario.Game.SCALE;
-import static me.giverplay.supermario.Game.WIDTH;
+import static me.giverplay.supermarcio.Game.HEIGHT;
+import static me.giverplay.supermarcio.Game.SCALE;
+import static me.giverplay.supermarcio.Game.WIDTH;
 
 public class UI {
   private final Game game;

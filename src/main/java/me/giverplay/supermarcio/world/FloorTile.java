@@ -1,4 +1,4 @@
-package me.giverplay.supermario.world;
+package me.giverplay.supermarcio.world;
 
 public class FloorTile extends Tile {
   public FloorTile(int x, int y, boolean top) {

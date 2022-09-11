@@ -1,7 +1,7 @@
-package me.giverplay.supermario.entities;
+package me.giverplay.supermarcio.entities;
 
-import me.giverplay.supermario.Game;
-import me.giverplay.supermario.sound.Sound;
+import me.giverplay.supermarcio.Game;
+import me.giverplay.supermarcio.sound.Sound;
 
 public class LifePack extends Collectible {
 

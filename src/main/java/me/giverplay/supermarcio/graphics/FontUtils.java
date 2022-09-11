@@ -1,4 +1,4 @@
-package me.giverplay.supermario.graphics;
+package me.giverplay.supermarcio.graphics;
 
 import java.awt.Font;
 import java.awt.FontFormatException;

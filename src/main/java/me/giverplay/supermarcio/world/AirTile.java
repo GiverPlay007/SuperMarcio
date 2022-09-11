@@ -1,4 +1,4 @@
-package me.giverplay.supermario.world;
+package me.giverplay.supermarcio.world;
 
 import java.awt.Graphics;
 

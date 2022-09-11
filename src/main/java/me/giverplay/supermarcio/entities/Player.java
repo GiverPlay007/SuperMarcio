@@ -1,13 +1,13 @@
-package me.giverplay.supermario.entities;
+package me.giverplay.supermarcio.entities;
 
-import me.giverplay.supermario.Game;
-import me.giverplay.supermario.graphics.Camera;
-import me.giverplay.supermario.sound.Sound;
+import me.giverplay.supermarcio.Game;
+import me.giverplay.supermarcio.graphics.Camera;
+import me.giverplay.supermarcio.sound.Sound;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import static me.giverplay.supermario.world.World.canMove;
+import static me.giverplay.supermarcio.world.World.canMove;
 
 public class Player extends Entity {
   private static final int DIR_RIGHT = 0;

@@ -1,6 +1,6 @@
-package me.giverplay.supermario.events;
+package me.giverplay.supermarcio.events;
 
-import me.giverplay.supermario.Game;
+import me.giverplay.supermarcio.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

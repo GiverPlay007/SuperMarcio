@@ -1,11 +1,11 @@
-package me.giverplay.supermario.world;
+package me.giverplay.supermarcio.world;
 
-import me.giverplay.supermario.Game;
+import me.giverplay.supermarcio.Game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import static me.giverplay.supermario.world.World.TILE_SIZE;
+import static me.giverplay.supermarcio.world.World.TILE_SIZE;
 
 public class Tile {
   private static final Game game = Game.getGame();

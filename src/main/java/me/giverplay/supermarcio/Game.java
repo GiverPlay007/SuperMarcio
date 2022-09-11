@@ -1,15 +1,15 @@
-package me.giverplay.supermario;
+package me.giverplay.supermarcio;
 
-import me.giverplay.supermario.entities.Entity;
-import me.giverplay.supermario.entities.Player;
-import me.giverplay.supermario.events.Listeners;
-import me.giverplay.supermario.graphics.Camera;
-import me.giverplay.supermario.graphics.FontUtils;
-import me.giverplay.supermario.graphics.FutureRender;
-import me.giverplay.supermario.graphics.Spritesheet;
-import me.giverplay.supermario.graphics.UI;
-import me.giverplay.supermario.sound.Sound;
-import me.giverplay.supermario.world.World;
+import me.giverplay.supermarcio.entities.Entity;
+import me.giverplay.supermarcio.entities.Player;
+import me.giverplay.supermarcio.events.Listeners;
+import me.giverplay.supermarcio.graphics.Camera;
+import me.giverplay.supermarcio.graphics.FontUtils;
+import me.giverplay.supermarcio.graphics.FutureRender;
+import me.giverplay.supermarcio.graphics.Spritesheet;
+import me.giverplay.supermarcio.graphics.UI;
+import me.giverplay.supermarcio.sound.Sound;
+import me.giverplay.supermarcio.world.World;
 
 import javax.swing.JFrame;
 import java.awt.Canvas;

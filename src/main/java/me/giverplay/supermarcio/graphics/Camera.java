@@ -1,4 +1,4 @@
-package me.giverplay.supermario.graphics;
+package me.giverplay.supermarcio.graphics;
 
 public class Camera {
   private int x;

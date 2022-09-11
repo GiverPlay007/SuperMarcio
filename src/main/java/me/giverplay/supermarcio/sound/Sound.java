@@ -1,4 +1,4 @@
-package me.giverplay.supermario.sound;
+package me.giverplay.supermarcio.sound;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;

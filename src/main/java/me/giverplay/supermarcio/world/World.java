@@ -1,12 +1,12 @@
-package me.giverplay.supermario.world;
+package me.giverplay.supermarcio.world;
 
-import me.giverplay.supermario.Game;
-import me.giverplay.supermario.entities.Coin;
-import me.giverplay.supermario.entities.Enemy;
-import me.giverplay.supermario.entities.LifePack;
-import me.giverplay.supermario.entities.NextLevel;
-import me.giverplay.supermario.graphics.Camera;
-import me.giverplay.supermario.utils.Cores;
+import me.giverplay.supermarcio.Game;
+import me.giverplay.supermarcio.entities.Coin;
+import me.giverplay.supermarcio.entities.Enemy;
+import me.giverplay.supermarcio.entities.LifePack;
+import me.giverplay.supermarcio.entities.NextLevel;
+import me.giverplay.supermarcio.graphics.Camera;
+import me.giverplay.supermarcio.utils.Cores;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics;

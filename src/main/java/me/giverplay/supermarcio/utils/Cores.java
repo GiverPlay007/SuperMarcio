@@ -1,4 +1,4 @@
-package me.giverplay.supermario.utils;
+package me.giverplay.supermarcio.utils;
 
 public class Cores {
   public static final int TILE_GRAMA = 0xFFFFFFFF;

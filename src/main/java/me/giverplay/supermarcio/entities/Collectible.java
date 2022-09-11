@@ -1,6 +1,6 @@
-package me.giverplay.supermario.entities;
+package me.giverplay.supermarcio.entities;
 
-import me.giverplay.supermario.Game;
+import me.giverplay.supermarcio.Game;
 
 import java.awt.image.BufferedImage;
 

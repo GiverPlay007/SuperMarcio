@@ -1,4 +1,4 @@
-package me.giverplay.supermario.graphics;
+package me.giverplay.supermarcio.graphics;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
