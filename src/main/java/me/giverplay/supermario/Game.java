@@ -54,7 +54,7 @@ public class Game extends Canvas implements Runnable {
   private boolean showGameOver = true;
   private boolean gameOver = false;
   private boolean nextLevel = false;
-  private boolean victory;
+  private boolean victory = false;
 
   private int gameOverFrames = 0;
   private int coins = 0;
@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable {
   }
 
   private void setupFrame() {
-    frame = new JFrame("Game 04 - Super Mario Clone");
+    frame = new JFrame("Game 04 - Super Márcio");
     frame.add(this);
     frame.setResizable(false);
     frame.setUndecorated(false);
